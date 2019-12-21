@@ -36,28 +36,38 @@ let table = function() {
           "\n-------------------------------------"
       );
     }
-    inquirer.prompt({
-      name: "item",
-      type: "input",
-      message: "What item would you like to purhcase?"
-    });
+    start(res);
   });
 };
 
-// function start() {
-//   inquirer.prompt({
-//     name: "item",
-//     type: "input",
-//     message: "What would you like to purchase?"
-//   });
-//   .then(function(answer) {
-//     // based on their answer, either call the bid or the post functions
-//     if (answer.postOrBid === "POST") {
-//       postAuction();
-//     } else if (answer.postOrBid === "BID") {
-//       bidAuction();
-//     } else {
-//       connection.end();
-//     }
-//   });
-//
+let start = function(res) {
+  inquirer
+    .prompt({
+      name: "item",
+      type: "input",
+      message: "What item would you like to purhcase? (enter product name)"
+    })
+    .then(function(answer) {
+      // console.log(answer);
+      for (let i = 0; i < res.length; i++) {
+        if (answer.item == res[i].product_name) {
+          inquirer
+            .prompt({
+              name: "quant",
+              type: "input",
+              message: "How many of these would you like to buy?"
+              // validate: function(value) {
+              //   if (isNaN(value) == false) {
+              //     return true;
+              //   } else {
+              //     return false;
+              //   }
+              // }
+            })
+            .then(function(answer) {
+              console.log(answer);
+            });
+        }
+      }
+    });
+};
